@@ -12,23 +12,23 @@ namespace PlayerMovement.Climbing
 		[SerializeField, Range(0f, 180f)]
 		float maxJumpAngle = 50f;
 
-		bool desiredJump; 
+		bool desiredJump;
 		bool desiredClimb;
 
 		protected override void Awake()
 		{
 			base.Awake();
 		}
-        protected override void Update()
-        {
-            base.Update();
+		protected override void Update()
+		{
+			base.Update();
 			desiredJump |= Input.GetKeyDown(KeyCode.Mouse0);
 			velocity = new Vector3(0, Input.GetAxis("Vertical"), 0);
 		}
 		protected override void FixedUpdate()
-        {
-			if(CurrentMoveType == MovementTypes.Climbing)
-            {
+		{
+			if (CurrentMoveType == MovementTypes.Climbing)
+			{
 				rb.isKinematic = true;
 				Debug.LogWarning("Climbing");
 				Debug.DrawRay(rb.position, ClampDirection(DirectionMouse()), Color.yellow); //Souris
@@ -36,38 +36,38 @@ namespace PlayerMovement.Climbing
 				Debug.DrawRay(rb.position, climbNormal.normalized, Color.red); //Normal
 
 				Movement();
-				
+
 				if (desiredJump && velocity == Vector3.zero)
-                {
+				{
 					desiredJump = false;
 					Jump();
 				}
-            }
+			}
 			base.FixedUpdate();
 		}
 
 		private void Movement()
-        {
+		{
 			//Active ou desactive la physique
-			if(velocity != Vector3.zero)
-            {
+			if (velocity != Vector3.zero)
+			{
 				rb.isKinematic = false;
 				rb.useGravity = false;
 			}
-            else
-            {
+			else
+			{
 				rb.isKinematic = true;
 				rb.useGravity = true;
 			}
 
 			// Bloque les mouvements si il n'y a aucun mur.
-			Vector3 rayCastPos = rb.position + (Vector3.up * .1f)* Mathf.Round(velocity.y);
+			Vector3 rayCastPos = rb.position + ( Vector3.up * .1f ) * Mathf.Round(velocity.y);
 			bool haveWall = Physics.Raycast(rayCastPos, Vector3.left * Mathf.Round(LastClimbNormal.x), out RaycastHit hit, 2f);
 
 			Debug.DrawRay(rayCastPos, Vector3.left * Mathf.Round(LastClimbNormal.x), Color.magenta);
 
 			if (haveWall)
-            {
+			{
 				rb.MovePosition(
 					rb.position + ProjectDirectionOnPlane(direction: velocity, normal: LastClimbNormal) * maxClimbSpeed * Time.fixedDeltaTime);
 			}
@@ -77,7 +77,7 @@ namespace PlayerMovement.Climbing
 			rb.isKinematic = false;
 			ChangeMoveType();
 
-			Vector3 dir = ClampDirection(direction : DirectionMouse() );
+			Vector3 dir = ClampDirection(direction: DirectionMouse());
 			rb.AddForce(jumpForce * dir, ForceMode.Impulse);
 		}
 
@@ -85,11 +85,11 @@ namespace PlayerMovement.Climbing
 		/// Limite la direction de Jump entre un angle
 		/// </summary>
 		private Vector3 ClampDirection(Vector3 direction)
-        {
+		{
 			float normal = Mathf.Round(LastClimbNormal.x);
 			float angle = Mathf.Atan2(direction.y, direction.x * normal) * Mathf.Rad2Deg;
 
-			Vector3 maxDir = Quaternion.Euler(0, 0, maxJumpAngle) *  Vector3.right;
+			Vector3 maxDir = Quaternion.Euler(0, 0, maxJumpAngle) * Vector3.right;
 			maxDir.x *= normal;
 			Vector3 minDir = Quaternion.Euler(0, 0, -maxJumpAngle) * Vector3.right;
 			minDir.x *= normal;
@@ -98,7 +98,7 @@ namespace PlayerMovement.Climbing
 			float minAngle = Mathf.Atan2(minDir.y, minDir.x * normal) * Mathf.Rad2Deg;
 
 
-			if (Mathf.Max(angle, maxAngle) == angle) 
+			if (Mathf.Max(angle, maxAngle) == angle)
 				return maxDir.normalized;
 			else if (Mathf.Min(angle, minAngle) == angle)
 				return minDir.normalized;

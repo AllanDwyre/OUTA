@@ -58,7 +58,7 @@ namespace Environnement.LevelGeneration
             {
                 grid.SetValue(i, 1, Instantiate<GameObject>(room, grid.GetCellPosition(i, 1), Quaternion.identity, transform));
 
-                if (i == roomNumber - 2)
+                if (i == roomNumber - 1)
                 {
                     EndofRoomStrip = grid.GetWorldPosition(i, 0) + new Vector3(cellSize.x, cellSize.y, 0);
                 }
