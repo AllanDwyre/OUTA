@@ -22,13 +22,12 @@ namespace Environnement.LevelGeneration
         public void MakePath(Vector3 _start , Vector3 _end)
         {
             start = _start + ( Vector3.right * pathOffset.x + Vector3.up * pathOffset.y );
-            end = _end - (Vector3.right * pathOffset.x + Vector3.up * pathOffset.y);
+            end = _end + (-Vector3.right * pathOffset.x + Vector3.up * pathOffset.y);
             MakePath();
         }
 
         private void MakePath()
         {
-            print(GetDist(start, end));
             // ratio point/distance : 1 cube tout les 2 metres
             int numberOfPoint = Mathf.RoundToInt(ratio * GetDist(start, end));
             print(numberOfPoint);
@@ -37,7 +36,7 @@ namespace Environnement.LevelGeneration
             {
                 Vector3 pos = GetDir(start, end) * (( (float)i / (float)numberOfPoint) * GetDist(start, end) );
                 pos += start;
-                array[i] = Instantiate(cube, pos, Quaternion.identity);
+                array[i] = Instantiate(cube, pos, Quaternion.identity ,transform);
             }
             InterlapolateCube(array);
         }

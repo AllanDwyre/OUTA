@@ -7,7 +7,7 @@ namespace PlayerMovement.Walking
         [Header("Ground Movement")]
         [SerializeField] private float jumpForce = 7f;
         [SerializeField, Range(0f, 20f)] private float maxGroundSpeed = 10f;
-        [SerializeField, Range(0f, 5f)] private float airMultiplier = .5f;
+        //[SerializeField, Range(0f, 5f)] private float airMultiplier = .5f;
         bool desiredJump;
 
        protected override void Awake()
@@ -41,7 +41,7 @@ namespace PlayerMovement.Walking
         {
 
             rb.MovePosition(rb.position + velocity * maxGroundSpeed * Time.fixedDeltaTime);
-            Debug.LogWarning("Ground");
+            //Debug.LogWarning("Ground");
            
         }
         /// <summary>

@@ -53,18 +53,16 @@ namespace Environnement.LevelGeneration
         /// </summary>
         void MakeRoom(int roomNumber)
         {
-            
             for (int i = 1;  i < roomNumber - 1; i++)
             {
                 grid.SetValue(i, 1, Instantiate<GameObject>(room, grid.GetCellPosition(i, 1), Quaternion.identity, transform));
 
-                if (i == roomNumber - 1)
+                if (i == roomNumber - 2)
                 {
                     EndofRoomStrip = grid.GetWorldPosition(i, 0) + new Vector3(cellSize.x, cellSize.y, 0);
                 }
             }
         }
-
     }
 
     public struct Level
