@@ -1,10 +1,9 @@
-# OUTA
-## Once Upon a Time an Astronaut
-C'est un jeu de plateforme basé sur l'exploration , l'escalade et l'accomplissement de quête. 
-Ce jeu aura un haut niveau de difficulté suite à un environnement particulièrement hostile. 
-Notre protagoniste pourra en effet rencontré plusieurs types d'obstacle plus ou moins létale et un petit nombre d'alien cherchant votre mort.
+OUTA *Once Upon a Time an Astronaut*
+---
 
-Le but de notre astronautes sera d'étudier son environnement et d'allez par ce fait le plus loin possible.
-Outre les dangers environnementaux ou extraterrestres, notre personnage pourra mourrir face à une quête mal accomplie.
+it's a **game project**, where i worked on a procedural level generation.
+Now it's a dead project, but i learnt about code architecture and game phycics. 
 
-A chaque mort un nouveau départ dans un monde construit procéduralement.
+May be one day i will restart from scratch this project. For now i want to focus on somethings than game developpement.
+
+thanks everyone, bye 🤙
